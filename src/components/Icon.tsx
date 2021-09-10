@@ -6,19 +6,30 @@ export interface IIconProps {
   disabled?: boolean;
   iconID: string;
   text: string;
+  color?: string;
 }
 
 export function Icon(props: IIconProps) {
+  
   return (
-    <View style={styles.container}>
-      <MaterialIcons
+    <View style={[styles.container, Boolean(props.text) && Boolean(props.iconID) ? {
+      justifyContent: "space-between"
+    } : { height: 40, justifyContent: "center" }, ]}>
+      {Boolean(props.iconID) && <MaterialIcons
         name={props.iconID}
         size={26}
-        color={props.disabled ? "grey" : "white"}
-      />
-      <Text style={[styles.text, props.disabled && { color: "grey" }]}>
+        color={props.color ? props.color : props.disabled ? "#f5f6Fa" : "#444"}
+      />}
+      {Boolean(props.text) && <Text
+        style={[
+          styles.text,
+          props.color ?
+            { color : props.color } :
+            props.disabled && { color: "#f5f6Fa" },
+          !Boolean(props.iconID) ? { fontSize: 16 } : {}
+        ]}>
         {props.text}
-      </Text>
+      </Text>}
     </View>
   );
 }
@@ -33,7 +44,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   text: {
-    color: "#fff",
+    color: "#444",
     textAlign: "center",
   },
 });

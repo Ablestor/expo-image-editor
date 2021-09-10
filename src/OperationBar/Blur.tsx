@@ -353,7 +353,7 @@ export function Blur() {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.row, { justifyContent: "center" }]}>
+      <View style={[styles.row, { justifyContent: "center", height: 60 }]}>
         <Slider
           value={sliderValue}
           onValueChange={(value) => {
@@ -366,21 +366,21 @@ export function Blur() {
           }}
           minimumValue={1}
           maximumValue={30}
-          minimumTrackTintColor="#00A3FF"
+          minimumTrackTintColor="#c00c3f"
           maximumTrackTintColor="#ccc"
-          thumbTintColor="#c4c4c4"
+          thumbTintColor="#c00c3f"
           containerStyle={styles.slider}
           trackStyle={styles.sliderTrack}
         />
       </View>
       <View style={styles.row}>
-        <IconButton iconID="close" text="Cancel" onPress={() => onClose()} />
+        <IconButton iconID="close" text="" onPress={() => onClose()} />
         <Text style={styles.prompt}>
-          Blur Radius: {Math.round(sliderValue)}
+          블러
         </Text>
         <IconButton
           iconID="check"
-          text="Done"
+          text=""
           onPress={() => onSaveWithBlur()}
         />
       </View>
@@ -396,7 +396,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   prompt: {
-    color: "#fff",
+    color: "#444",
     fontSize: 21,
     textAlign: "center",
   },
@@ -406,7 +406,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: "2%",
+    borderTopColor: "#f5f6Fa",
+    borderTopWidth: 1,
   },
   slider: {
     height: 20,

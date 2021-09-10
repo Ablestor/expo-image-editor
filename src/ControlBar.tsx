@@ -59,10 +59,10 @@ function ControlBar() {
 
   return (
     <View style={styles.container}>
-      <IconButton iconID="arrow-back" text="Back" onPress={onPressBack} />
+      <IconButton iconID="arrow-back" text="" onPress={onPressBack} />
       <IconButton
-        iconID="done"
-        text="Done"
+        iconID=""
+        text="완료"
         onPress={onFinishEditing}
         disabled={shouldDisableDoneButton}
       />
@@ -75,11 +75,12 @@ export { ControlBar };
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 80,
-    backgroundColor: "#333",
+    height: 40,
+    backgroundColor: "#fff",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 4,
+    paddingTop: 8,
+    paddingBottom: 4,
   },
 });

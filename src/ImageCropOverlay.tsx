@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  Animated,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  requireNativeComponent,
-  Platform,
-  ViewPropTypes,
-} from "react-native";
+import { Animated, StyleSheet, View, TouchableOpacity } from "react-native";
 import _ from "lodash";
 import { useRecoilState } from "recoil";
 import { cropSizeState, imageBoundsState, accumulatedPanState } from "./Store";
@@ -31,11 +23,15 @@ const ImageCropOverlay = () => {
   // Shared state and bits passed through recoil to avoid prop drilling
   const [cropSize, setCropSize] = useRecoilState(cropSizeState);
   const [imageBounds] = useRecoilState(imageBoundsState);
-  const [accumulatedPan, setAccumluatedPan] =
-    useRecoilState(accumulatedPanState);
+  const [accumulatedPan, setAccumluatedPan] = useRecoilState(
+    accumulatedPanState
+  );
   // Editor context
-  const { fixedAspectRatio, lockAspectRatio, minimumCropDimensions } =
-    useContext(EditorContext);
+  const {
+    fixedAspectRatio,
+    lockAspectRatio,
+    minimumCropDimensions,
+  } = useContext(EditorContext);
 
   const [animatedCropSize] = React.useState({
     width: new Animated.Value(cropSize.width),
@@ -291,6 +287,8 @@ const ImageCropOverlay = () => {
   return (
     <GestureHandlerRootView style={styles.container}>
       <PanGestureHandler
+        activeOffsetX={[0, 0]}
+        activeOffsetY={[0, 0]}
         onGestureEvent={onOverlayMove}
         onHandlerStateChange={(e) => onHandlerStateChange(e)}
       >
