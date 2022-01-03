@@ -14,11 +14,11 @@ export function Crop() {
     <View style={styles.container}>
       <IconButton
         iconID="close"
-        text="Cancel"
+        text=""
         onPress={() => setEditingMode("operation-select")}
       />
-      <Text style={styles.prompt}>Adjust window to crop</Text>
-      <IconButton iconID="check" text="Done" onPress={onPerformCrop} />
+      <Text style={styles.prompt}>자르기</Text>
+      <IconButton iconID="check" text="" onPress={onPerformCrop} />
     </View>
   );
 }
@@ -29,10 +29,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: "2%",
+    borderTopColor: "#f5f6Fa",
+    borderTopWidth: 1,
   },
   prompt: {
-    color: "#fff",
+    color: "#444",
     fontSize: 21,
     textAlign: "center",
   },

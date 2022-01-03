@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   glContainer: {
+    paddingTop: 60,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

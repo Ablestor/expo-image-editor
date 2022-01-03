@@ -100,56 +100,62 @@ export function OperationSelection() {
   return (
     <>
       <ScrollView style={styles.opRow} horizontal>
-        {
-          //@ts-ignore
-          filteredOperations[selectedOperationGroup].map(
-            (item: Operation<EditingOperations>, index: number) => (
-              <View style={styles.opContainer} key={item.title}>
-                <IconButton
-                  text={item.title}
-                  iconID={item.iconID}
-                  onPress={() => setEditingMode(item.operationID)}
-                />
-              </View>
-            )
+        {filteredOperations["transform"].map(
+          (item: Operation<EditingOperations>, index: number) => (
+            <View style={styles.opContainer} key={item.title}>
+              <IconButton
+                text={
+                  { Crop: "자르기", Rotate: "회전", Blur: "블러" }[
+                    item.title
+                  ] || ""
+                }
+                iconID={item.iconID}
+                onPress={() => setEditingMode(item.operationID)}
+              />
+            </View>
           )
-        }
+        )}
+        {filteredOperations["adjust"].map(
+          (item: Operation<EditingOperations>, index: number) => (
+            <View style={styles.opContainer} key={item.title}>
+              <IconButton
+                text={
+                  { Crop: "자르기", Rotate: "회전", Blur: "블러" }[
+                    item.title
+                  ] || ""
+                }
+                iconID={item.iconID}
+                onPress={() => setEditingMode(item.operationID)}
+              />
+            </View>
+          )
+        )}
       </ScrollView>
-      {!isTransformOnly && !isAdjustmentOnly ? (
+      {/* {!isTransformOnly && !isAdjustmentOnly ? (
         <View style={styles.modeRow}>
           <TouchableOpacity
-            style={[
-              styles.modeButton,
-              selectedOperationGroup === "transform" && {
-                backgroundColor: "#333",
-              },
-            ]}
+            style={styles.modeButton}
             onPress={() => setSelectedOperationGroup("transform")}
           >
-            <Icon iconID="transform" text="Transform" />
+            <Icon color={selectedOperationGroup === "transform" ? "#c00c3f" : undefined} iconID="transform" text=" " />
           </TouchableOpacity>
           <TouchableOpacity
-            style={[
-              styles.modeButton,
-              selectedOperationGroup === "adjust" && {
-                backgroundColor: "#333",
-              },
-            ]}
+            style={styles.modeButton}
             onPress={() => setSelectedOperationGroup("adjust")}
           >
-            <Icon iconID="tune" text="Adjust" />
+            <Icon color={selectedOperationGroup === "adjust" ? "#c00c3f" : undefined } iconID="tune" text=" " />
           </TouchableOpacity>
         </View>
-      ) : null}
+      ) : null} */}
     </>
   );
 }
 
 const styles = StyleSheet.create({
   opRow: {
-    height: 80,
+    height: 40,
     width: "100%",
-    backgroundColor: "#333",
+    backgroundColor: "#FFF",
   },
   opContainer: {
     height: "100%",
@@ -169,6 +175,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#222",
+    backgroundColor: "#FFF",
   },
 });

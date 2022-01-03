@@ -62,7 +62,6 @@ export interface ImageEditorProps {
   mode?: Mode;
   allowedTransformOperations?: TransformOperations[];
   allowedAdjustmentOperations?: AdjustmentOperations[];
-  asView?: boolean;
 }
 
 function ImageEditorCore(props: ImageEditorProps) {
@@ -77,9 +76,10 @@ function ImageEditorCore(props: ImageEditorProps) {
     allowedAdjustmentOperations,
   } = props;
 
-  const [, setImageData] = useRecoilState(imageDataState);
-  const [, setReady] = useRecoilState(readyState);
-  const [, setEditingMode] = useRecoilState(editingModeState);
+  const [imageData, setImageData] = useRecoilState(imageDataState);
+  const [ready, setReady] = useRecoilState(readyState);
+  const [processing, setProcessing] = useRecoilState(processingState);
+  const [editingMode, setEditingMode] = useRecoilState(editingModeState);
 
   // Initialise the image data when it is set through the props
   React.useEffect(() => {
@@ -103,8 +103,10 @@ function ImageEditorCore(props: ImageEditorProps) {
           };
           img.src = props.imageUri;
         } else {
-          const { width: pickerWidth, height: pickerHeight } =
-            await ImageManipulator.manipulateAsync(props.imageUri, []);
+          const {
+            width: pickerWidth,
+            height: pickerHeight,
+          } = await ImageManipulator.manipulateAsync(props.imageUri, []);
           setImageData({
             uri: props.imageUri,
             width: pickerWidth,
@@ -151,39 +153,17 @@ function ImageEditorCore(props: ImageEditorProps) {
       }}
     >
       <StatusBar hidden={props.visible} />
-      {props.asView ? (
-        <ImageEditorView {...props} />
-      ) : (
-        <UniversalModal
-          visible={props.visible}
-          presentationStyle="fullScreen"
-          statusBarTranslucent
-        >
-          <ImageEditorView {...props} />
-        </UniversalModal>
-      )}
+      <UniversalModal style={{ flex: 1 }}>
+        {ready ? (
+          <View style={styles.container}>
+            <ControlBar />
+            <EditingWindow />
+            {mode === "full" && <OperationBar />}
+          </View>
+        ) : null}
+        {processing ? <Processing /> : null}
+      </UniversalModal>
     </EditorContext.Provider>
-  );
-}
-
-export function ImageEditorView(props: ImageEditorProps) {
-  //
-  const { mode = "full" } = props;
-
-  const [ready, setReady] = useRecoilState(readyState);
-  const [processing, setProcessing] = useRecoilState(processingState);
-
-  return (
-    <>
-      {ready ? (
-        <View style={styles.container}>
-          <ControlBar />
-          <EditingWindow />
-          {mode === "full" && <OperationBar />}
-        </View>
-      ) : null}
-      {processing ? <Processing /> : null}
-    </>
   );
 }
 
@@ -200,6 +180,6 @@ export function ImageEditor(props: ImageEditorProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#222",
+    backgroundColor: "#fafafa",
   },
 });
