@@ -72,24 +72,24 @@ export function Rotate() {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.row, { justifyContent: 'space-around', height: 60 }]}>
+      <View style={[styles.row, { paddingHorizontal: "20%" }]}>
         <IconButton
           iconID="rotate-left"
-          text=""
+          text="Rotate -90"
           onPress={() => rotate("ccw")}
         />
         <IconButton
           iconID="rotate-right"
-          text=""
+          text="Rotate +90"
           onPress={() => rotate("cw")}
         />
       </View>
       <View style={styles.row}>
-        <IconButton iconID="close" text="" onPress={() => onClose()} />
-        <Text style={styles.prompt}>회전</Text>
+        <IconButton iconID="close" text="Cancel" onPress={() => onClose()} />
+        <Text style={styles.prompt}>Rotate</Text>
         <IconButton
           iconID="check"
-          text=""
+          text="Done"
           onPress={() => setEditingMode("operation-select")}
         />
       </View>
@@ -101,11 +101,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     alignItems: "center",
   },
   prompt: {
-    color: "#444",
+    color: "#fff",
     fontSize: 21,
     textAlign: "center",
   },
@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    borderTopColor: "#f5f6Fa",
-    borderTopWidth: 1,
+    paddingHorizontal: "2%",
   },
 });

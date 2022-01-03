@@ -26,10 +26,10 @@ export function OperationBar() {
   };
 
   return (
-    <View style={[styles.container, ["rotate", "blur"].includes(editingMode) ? { height: 140 } : {}]}>
+    <View style={styles.container}>
       <OperationSelection />
       {editingMode !== "operation-select" && (
-        <View style={[styles.container, ["rotate", "blur"].includes(editingMode) ? { height: 140 } : {}, { position: "absolute" }]}>
+        <View style={[styles.container, { position: "absolute" }]}>
           {getOperationWindow()}
         </View>
       )}
@@ -39,9 +39,9 @@ export function OperationBar() {
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+    height: 160,
     width: "100%",
-    backgroundColor: "#FFF",
+    backgroundColor: "#333",
     justifyContent: "center",
   },
 });

@@ -5,7 +5,7 @@ function Processing() {
 
   return(
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="#444" />
+      <ActivityIndicator size="large" color="#ffffff" />
     </View>
   );
 
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: '100%',
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#33333355',
     justifyContent: 'center',
     alignItems: 'center'
   }
